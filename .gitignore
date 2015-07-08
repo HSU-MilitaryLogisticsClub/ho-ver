@@ -39,9 +39,9 @@ luac.out
 *.x86_64
 *.hex
 
-# User
 
 *.hi
 *.jpg
 *.png
 *.bmp
+.*
