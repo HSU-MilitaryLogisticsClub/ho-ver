@@ -5,7 +5,6 @@ class I2C
   def initialize badr
     @bus_adr = badr
   end
-
   def hex2dec hex
     if (hex == "a")
       return 10
@@ -77,7 +76,6 @@ class I2C
   end
 
   # i2c
-
   def i2c_init(sle_adr , mem_adr ,set_val)
   `sudo i2cset -y #{@bus_adr} #{sle_adr} #{mem_adr} #{set_val} i`
   end

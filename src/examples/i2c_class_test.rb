@@ -1,6 +1,7 @@
 
 require "./I2C.rb"
 
+
 sc = I2C.new(1)
 
 x = sc.byte2d 15 , 15
