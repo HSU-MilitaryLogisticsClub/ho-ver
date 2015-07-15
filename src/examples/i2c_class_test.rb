@@ -1,21 +1,36 @@
 
 require "./I2C.rb"
 
+sleadd = 0x6a
+power_enable = 0x20
+setval = 0x0f
+bunnkainou = 0.00875
 
-sc = I2C.new(1)
+class L3GD20 < I2C
 
-x = sc.byte2d 15 , 15
-y = sc.word2d 0x8f , 0xff
-z = sc.signed_word2d ( sc.word2d 0x7f , 0xff )
+  def avetimes ave
+    sleadd = 0x6a
+    bunnkainou = 0.00875
+    data1 = 0
+    data2 = 0
+    data3 = 0
+    ave.times do
+      data1 = data1 + i2c_get(sleadd,  0x29)
+      data2 = data2 + i2c_get(sleadd,  0x2B)
+      data3 = data3 + i2c_get(sleadd,  0x2D)
+    end
+    print ((data1/ave)*bunnkainou)
+    print ","
+    print ((data2/ave)*bunnkainou)
+    print ","
+    puts ((data3/ave)*bunnkainou)
+  end
+end
 
-a = sc.str_byte_hex2d "0xff"
-b = sc.str_word2d "0x8f" , "0xff"
-c = sc.signed_word2d (sc.str_word2d "0x7f" , "0xff")
+sc = L3GD20.new(1)
 
-puts x
-puts y
-puts z
+sc.i2c_init(sleadd,power_enable,setval)
 
-puts a
-puts b
-puts c
+30.times do
+  sc.avetimes(1)
+end
