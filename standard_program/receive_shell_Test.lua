@@ -1,16 +1,16 @@
 shell = require "receive_shell"
 
-TestBegin = {
-	print(_[[
-		mkdir test.sh
-		ex1 = "a"
-		ex2 = 5
-		]])
-	end
-}
+os.execute([[
+			touch hoge.sh
+			echo x=5 y=6 z=4 > hoge.sh
+			]])
 
-function TestBegin.TestRead()
-	assert(ReadShell("test"),"a",5)
-end
+open = Receive:ReadShell()
+assert(open,5,6,4)
 
-TestRead().run()
+print("Test is succeed!")
+--open = Receive.new("test")
+--open:ReadShell()
+--assert(open:ReadShell(),"a",5)
+
+-- finish --
