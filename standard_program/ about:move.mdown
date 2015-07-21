@@ -6,7 +6,7 @@ move.luaは、RaspberryPiのGPiOで2つのモータを制御し、2輪ロボッ�
 可能な挙動は、前進・後退・左右旋回・停止 です。  
 以下に、可能な挙動と、それに対応した関数を示します。  
 
-なお、luaによるGPIO制御には、githubユーザのTieske氏が製作した [rpi-gpio](http://github.com/Tie/rpi-gpio) を使用させていただいています。
+なお、luaによるGPIO制御には、githubユーザのTieske氏が製作した [RPI-GPIO](https://github.com/Tie/rpi-gpio) を使用させていただいています。
 
 |動作|関数|
 |:-:|:-:|
