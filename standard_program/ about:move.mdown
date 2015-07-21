@@ -1,0 +1,25 @@
+# move.lua について
+---
+## 概要
+
+move.luaは、RaspberryPiのGPiOで2つのモータを制御し、2輪ロボットを動作させるプログラムです。  
+可能な挙動は、前進・後退・左右旋回・停止 です。  
+以下に、可能な挙動と、それに対応した関数を示します。  
+
+なお、luaによるGPIO制御には、githubユーザのTieske氏が製作した rpi.gpio(https://github.com/Tieske/rpi-gpio) を使用させていただいています。
+
+|動作|関数|
+|:-:|:-:|
+|前進|LuaGpio.Forward()|
+|後退|LuaGpio.Back()|
+|左旋回|LuaGpio.Left()|
+|右旋回|LuaGpio.Right()|
+|停止|LuaGpio.Stop()|
+---
+## 使い方（’15年7月21日現在）
+
+上記の表の関数に、動作させたい時間を秒単位で入力することで、入力した時間だけ対応した挙動を行います。  
+ただし、stop() に時間は入力できません。  
+また、入力時間は実数に限ります。  
+
+挙動は、move_test.lua にて確認してください。
