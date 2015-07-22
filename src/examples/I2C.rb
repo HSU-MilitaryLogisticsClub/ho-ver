@@ -81,8 +81,12 @@ class I2C
   end
   
   def i2c_get(sle_adr , mem_adr)
-  h = `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr}`
-  l = `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr - 1}`
-  return signed_word2d(str_word2d h ,l).  to_i
+    return `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr}`.to_i
+  end
+
+  def i2c_get2(sle_adr , mem_adr)
+    h = `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr}`
+    l = `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr + 1}`
+    return signed_word2d(str_word2d h ,l).  to_i
   end
 end

@@ -1,14 +1,12 @@
-move = require "move"
-shell = require "receive_shell"
+require "move"
+require "receive_shell"
 
-main = {
-	forward() = move.LuaGpio.Forward()
-	back() = move.LuaGpio.Back()
-	left() = move.LuaGpio.Left()
-	right() = move.LuaGpio.Right()
-	read() = receive_shell.ReadShell()
-}
+main = {}
 
-function main.Moving()
-	
+function main.Catch(self)
+	repeat
+		LuaGpio:Left(6)
+		get = Receive:ReadShell()
+		until 
+
 end
