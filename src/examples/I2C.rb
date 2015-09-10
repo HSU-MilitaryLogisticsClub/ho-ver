@@ -2,28 +2,95 @@
 #!/usr/bin/ruby
 
 class I2C
-  def initialize badr
+  def initialize(badr,sler)
     @bus_adr = badr
+    @sle_adr = sler
   end
-  def hex2dec hex
-    if (hex == "a")
-      return 10
-    elsif (hex == "b")
-      return 11
-    elsif (hex == "c")
-      return 12
-    elsif (hex == "d")
-      return 13
-    elsif (hex == "e")
-      return 14
-    elsif (hex == "f")
-      return 15
+
+  def hex2dec(hex)
+    sum = 0
+    (hex.length).times do |n|
+      a = 0
+      if (hex[n] >= 'a') and (hex[n] <= 'f')
+        a = (hex[n].encode("UTF-8").ord - 'a'.encode("UTF-8").ord + 10)
+      elsif (hex[n] >= '0') and (hex[n] <= '9')
+        a = hex[n].to_i
+      else
+        abort "(#{hex} -> hex2dec) => Out range ... erorr ."
+      end
+      sum = sum + (a * (16 ** (hex.length - n - 1)))
+    end
+    return sum
+  end
+
+  def dec2hex(dec)
+    div = dec / (16)
+    if div >= 1
+      return (dec2hex div) + (d2h dec)
     else
-      return hex.to_i
+      return (d2h dec)
     end
   end
 
-  def dec2hex_private dec
+  def signed_int(word_dec)
+    if (word_dec >= 0x8000) and (word_dec <= 0xffff)
+      return -((65535 - word_dec) + 1)
+    elsif (word_dec >= 0) and (word_dec < 0x8000)
+      return word_dec
+    else
+      abort "(#{word_dec} -> signed_int) => Out range ... erorr ."
+    end
+  end
+
+  # i2c
+  def i2c_set(adress,set_val)
+  `sudo i2cset -y #{@bus_adr} #{@sle_adr} #{adress} #{set_val} i`
+  end
+  
+  def i2c_get(adress)
+    byte = `sudo i2cget -y #{@bus_adr} #{ @sle_adr} #{adress}`
+    return byte[2]+byte[3]
+  end
+
+  def i2c_get_wordB(adress)
+    word = `sudo i2cget -y #{@bus_adr} #{ @sle_adr} #{adress} w`
+    return word[2]+word[3]+word[4]+word[5]
+  end
+
+  def i2c_get_wordL(adress)
+    word = `sudo i2cget -y #{@bus_adr} #{ @sle_adr} #{adress} w`
+    return word[4]+word[5]+word[2]+word[3]
+  end
+
+  def get_xyzB(xadr)
+    x = i2c_get_wordB(xadr)
+    y = i2c_get_wordB(xadr+2)
+    z = i2c_get_wordB(xadr+4)
+    return (xyz_trans [x,y,z])
+  end
+
+  def get_xyzL(xadr)
+    x = i2c_get_wordL(xadr)
+    y = i2c_get_wordL(xadr+2)
+    z = i2c_get_wordL(xadr+4)
+    return (xyz_trans [x,y,z])
+  end
+
+  def averageB(ave)
+    xyz = [0,0,0]
+    newxyz = []
+    ave.times do
+      xyz = ap(xyz ,get_xyzB(x_address))
+    end
+    xyz.each do |x|
+      newxyz.push((x / ave) * scale_multiplier)
+    end
+    return newxyz
+  end
+
+  private
+
+  def d2h(dec)
     mod = dec % (16)
     if (mod == 10)
       return "a"
@@ -42,51 +109,15 @@ class I2C
     end
   end
 
-  def d2h dec
-    div = dec / (16)
-    if div >= 1
-      return (d2h div) + (dec2hex_private   dec)
-    else
-      return "0x" + (dec2hex_private dec)
+  def xyz_trans(xyz_arr)
+    out = []
+    xyz_arr.each do |x|
+      out.push(signed_int(hex2dec(x)))
     end
+    return out
   end
 
-  def byte2d h ,l
-    return ((h * 16) + l )
-  end
-
-  def word2d h ,l
-    return ( (h * 256) + l )
-  end
-
-  def signed_word2d word_dec
-    if (word_dec >= 0x8000)
-      return -((65535 - word_dec) + 1)
-    else
-      return word_dec
-    end
-  end
-
-  def str_byte_hex2d sbin
-    return (byte2d (hex2dec sbin[2]),(  hex2dec sbin[3]) )
-  end
-
-  def str_word2d sh ,sl
-    return ((str_byte_hex2d sh) * 256) + ( str_byte_hex2d sl)
-  end
-
-  # i2c
-  def i2c_init(sle_adr , mem_adr ,set_val)
-  `sudo i2cset -y #{@bus_adr} #{sle_adr} #{mem_adr} #{set_val} i`
-  end
-
-  def i2c_get(sle_adr , mem_adr)
-    return `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr}`.to_i
-  end
-
-  def i2c_get2(sle_adr , mem_adr)
-    h = `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr}`
-    l = `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr + 1}`
-    return signed_word2d(str_word2d h ,l).  to_i
+  def ap(xyz0,xyz1)
+    return([xyz0[0]+xyz1[0],xyz0[1]+xyz1[1],xyz0[2]+xyz1[2]])
   end
 end
