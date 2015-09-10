@@ -16,6 +16,7 @@ class ADXL345 < I2C
   def avetimes time , ave
     bus_address = 0x53
     scale_multiplier = 0.004
+    earth_gravity = 9.80665
     data1 = 0
     data2 = 0
     data3 = 0
