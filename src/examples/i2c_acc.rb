@@ -46,5 +46,5 @@ end
 
   time = Time.now
   30.times do
-    cs.avetimes(time,2)
+    sc.avetimes(time,2)
   end

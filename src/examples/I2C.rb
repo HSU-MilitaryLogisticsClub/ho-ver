@@ -22,7 +22,7 @@ class I2C
       return hex.to_i
     end
   end
-  
+
   def dec2hex_private dec
     mod = dec % (16)
     if (mod == 10)
@@ -41,7 +41,7 @@ class I2C
       return mod.to_s
     end
   end
-  
+
   def d2h dec
     div = dec / (16)
     if div >= 1
@@ -50,15 +50,15 @@ class I2C
       return "0x" + (dec2hex_private dec)
     end
   end
-  
+
   def byte2d h ,l
     return ((h * 16) + l )
   end
-  
+
   def word2d h ,l
     return ( (h * 256) + l )
   end
-  
+
   def signed_word2d word_dec
     if (word_dec >= 0x8000)
       return -((65535 - word_dec) + 1)
@@ -66,11 +66,11 @@ class I2C
       return word_dec
     end
   end
-  
+
   def str_byte_hex2d sbin
     return (byte2d (hex2dec sbin[2]),(  hex2dec sbin[3]) )
   end
-  
+
   def str_word2d sh ,sl
     return ((str_byte_hex2d sh) * 256) + ( str_byte_hex2d sl)
   end
@@ -79,7 +79,7 @@ class I2C
   def i2c_init(sle_adr , mem_adr ,set_val)
   `sudo i2cset -y #{@bus_adr} #{sle_adr} #{mem_adr} #{set_val} i`
   end
-  
+
   def i2c_get(sle_adr , mem_adr)
     return `sudo i2cget -y #{@bus_adr} #{ sle_adr} #{mem_adr}`.to_i
   end
