@@ -21,9 +21,9 @@ class ADXL345 < I2C
     data2 = 0
     data3 = 0
     ave.times do
-      data1 = data1 + i2c_get_ADXL345(bus_address, 0x32)
-      data2 = data2 + i2c_get_ADXL345(bus_address, 0x34)
-      data3 = data3 + i2c_get_ADXL345(bus_address, 0x36)
+      data1 = data1 + i2c_get_ADXL345(bus_address, 0x33)
+      data2 = data2 + i2c_get_ADXL345(bus_address, 0x35)
+      data3 = data3 + i2c_get_ADXL345(bus_address, 0x37)
     end
     print (Time.new - time)
     print ", "
