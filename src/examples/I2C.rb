@@ -76,14 +76,14 @@ class I2C
     return (xyz_trans [x,y,z])
   end
 
-  def averageB(ave)
+  def averageB(xadr,ave)
     xyz = [0,0,0]
     newxyz = []
     ave.times do
-      xyz = ap(xyz ,get_xyzB(x_address))
+      xyz = ap(xyz ,get_xyzB(xadr))
     end
     xyz.each do |x|
-      newxyz.push((x / ave) * scale_multiplier)
+      newxyz.push(x / ave)
     end
     return newxyz
   end
