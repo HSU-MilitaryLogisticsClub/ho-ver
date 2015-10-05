@@ -1,33 +1,40 @@
-require "move"
-require "receive_shell"
-
+require "move" --GPIOを使用するためのもの
+require "receive_shell" --シェル関数でファイルからデータを取るもの
+require "sleep" --いわゆる wait を使うためのもの
 
 main = {
-	LuaGpio:ReadyGpio(),
+	LuaGpio:ReadyGpio()
 	get = {}
 }
 
 function main.Catch(self)
+	self.get = Receive:ReadShell()
+	a=1	
 
-	while true do
+	repeat
 
-		repeat
-			LuaGpio:Left(60)
-			self.get = Receive:ReadShell()
-		until self.get[2]>1 --get[2]：距離を予定
+		while true do	
+			if self.get[a]==1 then --luaの列は1から数える
+				while self.get[a]==1
+					self.LuaGpio:Left(1)
+					a++
+					wait(0.1)
 
-		if self.get[2]<2 then
-			LuaGpio:Stop()
-			break
+					self.LuaGpio:Right(2)
+					break
+				end
+			end
+
+			else
+				self.LuaGpio:Left(2)
+			end
+
+			wait(0.1)
+			a++
 		end
 
-		LuaGpio:Left(self.get[1]) --get[1]：相対角度を予定
+		LuaGpio:Forward(3)
 		LuaGpio:Stop()
 
-		LuaGpio:Forward(self.get[2])
-		LuaGpio:Stop()
-
-	end
+	until get[a-1]==0
 end
-
-main.run()
