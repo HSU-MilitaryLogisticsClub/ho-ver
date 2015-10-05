@@ -23,10 +23,10 @@ function main.Catch(self)
 					self.LuaGpio:Right(2)
 					break
 				end
-			end
 
 			else
 				self.LuaGpio:Left(2)
+				
 			end
 
 			wait(0.1)

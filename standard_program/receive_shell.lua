@@ -1,6 +1,7 @@
 Receive = {
-	ReadShell = function (self)
+	ReadShell = function (self,a)
 
+	if a==1 then
 		read = os.execute([=[
 				#!/bin/sh
 
@@ -8,6 +9,14 @@ Receive = {
 				./hoge.sh
 			]=]) 
 
+	else
+		read = os.execute([=[
+				#!/bin/sh
+
+				chmod u+x hogehoge.sh    #write reading file 
+				./hoge.sh
+			]=])
+	end 
 --		print(read)
 		get = tonumber(read,10)	--"read" excange for decimal number
 		return(get)
