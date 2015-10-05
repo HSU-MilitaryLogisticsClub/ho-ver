@@ -1,9 +1,7 @@
 main = require "main"
 
-Testmain = {
-	moving() = main.main.Moving()
-}
+Testmain = {}
 
-function Testmain.TestMoving()
+function Testmain.TestCatch()
 
 end
