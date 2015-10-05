@@ -7,19 +7,33 @@ main = {
 }
 
 function main.Catch(self)
+	self.get = Receive:ReadShell()
+	a=1	
+
 	repeat
-		while true do
-			LuaGpio:Left(6)
-			self.get = Receive:ReadShell()
-		
-			if get[1]>0, get[2]>0, get[3]>0 do --
-				LuaGpio:Stop()
+
+		while true do	
+			if self.get[a]==1 then --luaの列は1から数える
+
+				while self.get[a]==1
+					self.LuaGpio:Left(2)
+					a++
+				end
+
+				self.LuaGpio:Right(4)
 				break
+
 			end
+
+			else
+				self.LuaGpio:Left(2)
+			end
+
+			a++
 		end
 
-		LuaGpio:Forward(5)
+		LuaGpio:Forward(3)
 		LuaGpio:Stop()
 
-		until get[1]>0, get[2]>0, get[3]>0
+	until get[1]==0
 end
