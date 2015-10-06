@@ -1,5 +1,5 @@
 require "move" --GPIOを使用するためのもの
-require "receive" --シェルファイルからデータを取るもの
+require "receive_shell" --シェルファイルからデータを取るもの
 require "sleep" --いわゆる wait を使うためのもの
 
 main = {
@@ -9,7 +9,7 @@ main = {
 }
 
 function main.Catch(self)
-	self.get = Receive.read(hoge)
+	self.get = Receive:ReadShell(1)
 	a=1	
 
 	repeat
@@ -41,6 +41,6 @@ function main.Catch(self)
 end
 
 function main.Read(self)
-	self.read = Receive.ReadShell() --カメラ以外のセンサデータを取得
+	self.read = Receive:ReadShell() --カメラ以外のセンサデータを取得
 
 end
