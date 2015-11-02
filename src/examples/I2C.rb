@@ -44,7 +44,7 @@ class I2C
 
   # i2c
   def i2c_set(adress,set_val)
-  `sudo i2cset -y #{@bus_adr} #{@sle_adr} #{adress} #{set_val} i`
+    `sudo i2cset -y #{@bus_adr} #{@sle_adr} #{adress} #{set_val}`
   end
   
   def i2c_get(adress)
@@ -88,6 +88,10 @@ class I2C
     return newxyz
   end
 
+  def trans(x)
+    signed_int(hex2dec(x))
+  end
+
   private
 
   def d2h(dec)
@@ -112,7 +116,7 @@ class I2C
   def xyz_trans(xyz_arr)
     out = []
     xyz_arr.each do |x|
-      out.push(signed_int(hex2dec(x)))
+      out.push(trans(x))
     end
     return out
   end
