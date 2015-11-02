@@ -5,7 +5,7 @@ Receive = {}
 			read = os.execute([[
 				#!/bin/sh
 				chmod +x hoge.rb
-				ruby hoge.rb >> hoge.sh
+				ruby hoge.rb >> hoge.sh  #用途で名称変更
 			
 			]])
 
@@ -13,7 +13,7 @@ Receive = {}
 			read = os.execute([[
 				#!/bin/sh
 				chmod +x hoge.py
-				python hoge.py >> hogehoge.sh
+				python hoge.py >> hogehoge.sh 
 			
 			]])
 		end
@@ -24,7 +24,7 @@ Receive = {}
 			read = os.execute([=[
 					#!/bin/sh
 					tail hoge.sh
-					#chmod u+x hoge.sh    #write reading file 
+					#chmod u+x hoge.sh
 					#./hoge.sh
 				]=]) 
 
