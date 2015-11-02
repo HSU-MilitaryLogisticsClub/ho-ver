@@ -1,19 +1,21 @@
 shell = require "receive_shell"
 
-os.execute([[
-			touch hoge.sh
-			echo x=5 y=6 z=4 > hoge.sh
-			touch hogehoge.sh
-			echo "5" > hogehoge.sh
-			]])
+--os.execute([[
+--			touch hoge.sh
+--			echo x=5 y=6 z=4 > hoge.sh
+--			touch hogehoge.sh
+--			echo "5" > hogehoge.sh
+--			]])
 
-open = Receive:ReadShell(1)
+call = Receive.CallShell(1)
+open = Receive.ReadShell(1)
 assert(open,5,6,4)
 print("Test1 is succeed!")
 --open = Receive.new("test")
 --open:ReadShell()
 --assert(open:ReadShell(),"a",5)
-open = Receive:ReadShell()
+call = Receive.CallShell()
+open = Receive.ReadShell()
 assert(open,5)
 print("Test2 is succeed!")
 -- finish --
