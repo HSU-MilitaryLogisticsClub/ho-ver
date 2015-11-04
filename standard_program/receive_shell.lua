@@ -23,7 +23,7 @@ Receive = {}
 		if a==1 then
 			read = os.execute([=[
 					#!/bin/sh
-					tail hoge.sh
+					tail -n 1 hoge.sh
 					#chmod u+x hoge.sh
 					#./hoge.sh
 				]=]) 
@@ -31,7 +31,7 @@ Receive = {}
 		else
 			read = os.execute([=[
 					#!/bin/sh
-					tail hogehoge.sh
+					tail -n 1 hogehoge.sh
 					#chmod u+x hogehoge.sh    #write reading file 
 					#./hoge.sh
 				]=])
