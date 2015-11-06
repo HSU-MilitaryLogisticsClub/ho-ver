@@ -7,7 +7,9 @@ main = {
 	get = {},
 	self.call1 = Receive.CallShell(1),
 	self.call2 = Receive.CallShell(),
-	self.get = Receive.ReadShell(1)
+	self.get = Receive.ReadShell(1),
+	self.open1 = io.open("hoge.sh","a"),
+	self.open2 = io.open("hogehoge.sh","a")
 }
 
 function main.Catch(self)
@@ -15,14 +17,14 @@ function main.Catch(self)
 
 	self.call2
 	wait(0.1)
-	io.open("hogehoge.sh","a")
+	self.open2
 	io.write(os.data().." Start!")
-	io.close("hogehoge.sh")
+	io.close()
 	wait(0.1)
 
-	io.open("hoge.sh","a")
+	self.open1
 	io.write(os.data().." Start!")
-	io.close("hoge.sh")
+	io.close()
 	wait(0.1)
 	self.call1
 	wait(0.1)
@@ -40,26 +42,26 @@ function main.Catch(self)
 		wait(0.1)
 
 		self.call1
-		io.open("hoge.sh","a")
+		self.open1
 		io.write(os.data()..string.format(" %s週目",i))
-		io.close("hoge.sh")
+		io.close()
 		wait(0.1)
 		a = a+2
 
 		self.call2
-		io.open("hogehoge.sh","a")
+		self.open2
 		io.write(os.data()..string.format(" %s週目",i))
-		io.close("hogehoge.sh")
+		io.close()
 		wait(0.1)
 	end
 
-	io.open("hoge.sh","a")
+	self.open1
 	io.write(os.data().." Finish!")
-	io.close("hoge.sh")
+	io.close()
 	wait(0.1)
 
-	io.open("hogehoge.sh","a")
+	self.open2
 	io.write(os.data().." Finish!")
-	io.close("hogehoge.sh")
+	io.close()
 	wait(0.1)
 end
