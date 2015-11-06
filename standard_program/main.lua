@@ -3,44 +3,63 @@ require "receive_shell" --シェルファイルからデータを取るもの
 require "sleep" --いわゆる wait を使うためのもの
 
 main = {
-	LuaGpio:ReadyGpio()
-	get = {}
-	read = {}
+	LuaGpio:ReadyGpio(),
+	get = {},
+	self.call1 = Receive.CallShell(1),
+	self.call2 = Receive.CallShell(),
+	self.get = Receive.ReadShell(1)
 }
 
 function main.Catch(self)
-	self.get = Receive:ReadShell(1)
-	a=1	
+	a = 2
 
-	repeat
+	self.call2
+	wait(0.1)
+	io.open("hogehoge.sh","a")
+	io.write(os.data().." Start!")
+	io.close("hogehoge.sh")
+	wait(0.1)
 
-		while true do	
-			if self.get[a]==1 then --luaの列は1から数える
-				while self.get[a]==1
-					self.LuaGpio.Left(1)
-					a++
-					wait(0.1)
+	io.open("hoge.sh","a")
+	io.write(os.data().." Start!")
+	io.close("hoge.sh")
+	wait(0.1)
+	self.call1
+	wait(0.1)
 
-					self.LuaGpio.Right(2)
-					break
-				end
-
-			else
-				self.LuaGpio.Left(2)
-
-			end
-
+	for i=1,3 do
+		while self.get[a] == 0 do
+			LuaGpio.Left(2)
+			wait(0.1)
+			self.call1
 			wait(0.1)
 			a++
 		end
 
-		LuaGpio.Forward(3)
-		LuaGpio.Stop()
+		LuaGpio.Forward(5)
+		wait(0.1)
 
-	until get[a-1]==0
-end
+		self.call1
+		io.open("hoge.sh","a")
+		io.write(os.data()..string.format(" %s週目",i))
+		io.close("hoge.sh")
+		wait(0.1)
+		a = a+2
 
-function main.Read(self)
-	self.read = Receive:ReadShell() --カメラ以外のセンサデータを取得
+		self.call2
+		io.open("hogehoge.sh","a")
+		io.write(os.data()..string.format(" %s週目",i))
+		io.close("hogehoge.sh")
+		wait(0.1)
+	end
 
+	io.open("hoge.sh","a")
+	io.write(os.data().." Finish!")
+	io.close("hoge.sh")
+	wait(0.1)
+
+	io.open("hogehoge.sh","a")
+	io.write(os.data().." Finish!")
+	io.close("hogehoge.sh")
+	wait(0.1)
 end
