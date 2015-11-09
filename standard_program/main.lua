@@ -15,23 +15,23 @@ main = {
 function main.Catch(self)
 	a = 2
 
-	self.call2
-	wait(0.1)
-	self.open2
 	io.write(os.data().." Start!")
 	io.close()
 	wait(0.1)
+	self.call2
+	self.open2
+	wait(0.1)
 
-	self.open1
 	io.write(os.data().." Start!")
 	io.close()
 	wait(0.1)
 	self.call1
+	self.open1
 	wait(0.1)
 
 	for i=1,3 do
 		while self.get[a] == 0 do
-			LuaGpio.Left(2)
+			LuaGpio.Left(1)
 			wait(0.1)
 			self.call1
 			wait(0.1)
@@ -41,27 +41,32 @@ function main.Catch(self)
 		LuaGpio.Forward(5)
 		wait(0.1)
 
-		self.call1
-		self.open1
 		io.write(os.data()..string.format(" %s週目",i))
 		io.close()
+		wait(0.1)
+		self.call1
+		self.open1
 		wait(0.1)
 		a = a+2
 
-		self.call2
-		self.open2
 		io.write(os.data()..string.format(" %s週目",i))
 		io.close()
 		wait(0.1)
+		self.call2
+		self.open2
+		wait(0.1)
 	end
 
-	self.open1
 	io.write(os.data().." Finish!")
 	io.close()
+	wait(0.1)
+	self.open1
 	wait(0.1)
 
-	self.open2
 	io.write(os.data().." Finish!")
 	io.close()
 	wait(0.1)
+	self.open2
+	wait(0.1)
+
 end
