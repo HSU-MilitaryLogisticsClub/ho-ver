@@ -6,7 +6,7 @@ require "sleep" --いわゆる wait を使うためのもの
 
 main = {
 --	LuaGpio:ReadyGpio(),
-	get = {}
+--	get = {}
 }
 
 
@@ -17,50 +17,50 @@ function main.Catch()
 	open1 = io.open("hoge.txt","a")
 	open2 = io.open("hogehoge.txt","a")
 
-	a = 2
+--	a = 2
 
-	open1:write(os.date().." Start!\n")
+--	open1:write(os.date().." Start!\n")
 --	io.close()
 --	wait(0.1)
 --	call1
 	Receive.CallShell(1)
 --	wait(0.1)
 
-	open2:write(os.date().." Start!\n")
-	io.close()
+--	open2:write(os.date().." Start!\n")
+--	io.close()
 --	wait(0.1)
 --	call2
 	Receive.CallShell()
---	wait(0.1)
+	wait(0.3)
 
 	for i=1,3 do
---		while self.get[a] == 0 do
+		while Receive.CallShell(1) == 0 do
 --			LuaGpio.Left(1)
 --			wait(0.1)
---		call1
-		Receive.CallShell(1)
---		wait(0.1)
-		a = a+1
---		end
+--			call1
+			Receive.CallShell(1)
+			Receive.CallShell()
+			wait(0.3)
+--			a = a+1
+		end
 
 --		LuaGpio.Forward(5)
---		wait(0.1)
 
-		open1:write(os.date()..string.format(" %s週目",i).."\n")
+--		open1:write(os.date()..string.format(" %s週目",i).."\n")
 --		io.close()
 --		wait(0.1)
 --		call1
-		Receive.CallShell(1)
+--		Receive.CallShell(1)
 --		wait(0.1)
-		a = a+2
-
+--		a = a+2
+		Receive.CallShell(1)
 --		open2
-		open2:write(os.date()..string.format(" %s週目",i).."\n")
+--		open2:write(os.date()..string.format(" %s週目",i).."\n")
 --		io.close()
 --		wait(0.1)
 --		call2
 		Receive.CallShell()
---		wait(0.1)
+		wait(0.3)
 	end
 
 --	open1

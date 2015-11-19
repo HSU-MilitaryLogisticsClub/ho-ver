@@ -1,47 +1,49 @@
 Receive = {}
 	
-	function Receive.CallShell(self,b)
+	function Receive.CallShell(b)
 		if b==1 then
 			read = os.execute([[
 				#!/bin/sh
-				chmod +x hoge.rb
-				ruby hoge.rb >> hoge.sh  #用途で名称変更
-			
-			]])
+				date >> hoge.txt  #動作時の日付、時刻を入力
+				date +%N >> hoge.txt  #動作時のナノ秒の値を返す
+				python hoge.py >> hoge.txt  #用途で名称変更
 
+			]])
+			
 		else
 			read = os.execute([[
 				#!/bin/sh
-				chmod +x hoge.py
-				python hoge.py >> hogehoge.sh 
+				date >> hogehoge.txt
+				date +%N >> hogehoge.txt  #動作時のナノ秒の値を返す
+				chmod +x hoge.rb
+				ruby hoge.rb >> hogehoge.txt 
 			
 			]])
 		end
 	end
 
-	function Receive.ReadShell(self,a)
+	function Receive.ReadShell(a)
 		if a==1 then
-			read = os.execute([=[
+		read = os.execute([=[
 					#!/bin/sh
-					tail -n 1 hoge.sh
-					#chmod u+x hoge.sh
+					tail -n 1 hoge.txt
+					#chmod u+x hoge.txt
 					#./hoge.sh
-				]=]) 
+				]=])
 
 		else
 			read = os.execute([=[
 					#!/bin/sh
-					tail -n 1 hogehoge.sh
-					#chmod u+x hogehoge.sh    #write reading file 
+					tail -n 1 hogehoge.txt
+					#chmod u+x hogehoge.txt    #write reading file 
 					#./hoge.sh
 				]=])
 		end 
---			print(read)
-			get = tonumber(read,10)	--"read" excange for decimal number
-			return(get)
+			print(read)
+--			get = tonumber(read,10)	--"read" excange for decimal number
+--			return(get)
 	end
 
-	
 
 --Receive:ReadShell()
 

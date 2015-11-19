@@ -3,70 +3,37 @@ require "receive_shell" --シェルファイルからデータを取るもの
 require "sleep" --いわゆる wait を使うためのもの
 
 main = {
-	LuaGpio:ReadyGpio(),
-	get = {},
-	self.call1 = Receive.CallShell(1),
-	self.call2 = Receive.CallShell(),
-	self.get = Receive.ReadShell(1),
-	self.open1 = io.open("hoge.sh","a"),
-	self.open2 = io.open("hogehoge.sh","a")
+	LuaGpio:ReadyGpio()
 }
 
-function main.Catch(self)
-	a = 2
-
-	io.write(os.data().." Start!")
-	io.close()
-	wait(0.1)
-	self.call2
-	self.open2
-	wait(0.1)
-
-	io.write(os.data().." Start!")
-	io.close()
-	wait(0.1)
-	self.call1
-	self.open1
-	wait(0.1)
+function main.Catch()
+	Receive.CallShell(1)
+	Receive.CallShell()
+	wait(0.3)
 
 	for i=1,3 do
-		while self.get[a] == 0 do
+		while Receive.CallShell(1) == 0 do
 			LuaGpio.Left(1)
-			wait(0.1)
-			self.call1
-			wait(0.1)
-			a++
+			Receive.CallShell(1)
+			wait(0.3)
 		end
 
 		LuaGpio.Forward(5)
-		wait(0.1)
 
-		io.write(os.data()..string.format(" %s週目",i))
-		io.close()
-		wait(0.1)
-		self.call1
-		self.open1
-		wait(0.1)
-		a = a+2
-
-		io.write(os.data()..string.format(" %s週目",i))
-		io.close()
-		wait(0.1)
-		self.call2
-		self.open2
+		Receive.CallShell(1)
+		Receive.CallShell()
 		wait(0.1)
 	end
 
-	io.write(os.data().." Finish!")
-	io.close()
-	wait(0.1)
-	self.open1
-	wait(0.1)
-
-	io.write(os.data().." Finish!")
-	io.close()
-	wait(0.1)
-	self.open2
-	wait(0.1)
-
+	open1 = io.open("hoge.txt","a")
+	open1:write(os.date().." Finish!")
+	open1:close()
+	
+	open2 = io.open("hogehoge.txt","a")
+	open2:write(os.date().." Finish!")
+	open1:close()
 end
+
+
+
+main.Catch()
