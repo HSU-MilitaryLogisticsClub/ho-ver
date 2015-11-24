@@ -14,7 +14,7 @@ main.luaは、hoverに関わるプログラムを統合し、実行するプロ�
 	
 	以上の動作を3回繰り返す
 
-	> フローチャート版：[Dropbox](https://www.dropbox.com/home/HMU/2015%E5%B9%B4%E5%BA%A6/hover?preview=flow.gif)に置きます。  
+	[フローチャート版](https://www.dropbox.com/home/HMU/2015%E5%B9%B4%E5%BA%A6/hover?preview=flow.gif)
 
 本プログラムは、move.lua,receive.lua,sleep.luaで構成されています
 また、RaspberryPiでモータを制御するため、Tieske氏作成のLuaでGPIOを制御する"rpi-gpio"というパッケージを使用しています
@@ -24,14 +24,14 @@ main.luaは、hoverに関わるプログラムを統合し、実行するプロ�
 --本プログラムの実行には、RaspberryPiに"rpi-gpio"のインストールが不可欠です
 以下のコードを上から順に入力すると、インストールできます
 
->	$ sudo apt-get install luarocks
->	$ sudo luarocks install rpi-gpio --server=http://luarocks.org/repositories/rocks-scm
+	$ sudo apt-get install luarocks
+	$ sudo luarocks install rpi-gpio --server=http://luarocks.org/repositories/rocks-scm
 
 インストール方法や"rpi-gpio"についての詳細は、[Tieske氏のgithubページ](https://github.com/Tieske/rpi-gpio/blob/master/lua/README.md) へ
 
 --GPIOの仕様により、ルート権限で実行しなければ動きません。以下のコードで実行できます
 
->	$ sudo lua main.lua
+	$ sudo lua main.lua
 
 ---
 ## 仕様
