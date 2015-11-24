@@ -2,18 +2,49 @@
 ---
 ## 概要
 
-main.luaは、hoverに関わるプログラムを統合し、実行するプログラムです。  
+main.luaは、hoverに関わるプログラムを統合し、実行するプログラムです。
 
-ロジックはフローチャートにして[Dropbox](https://www.dropbox.com/home/HMU/2015%E5%B9%B4%E5%BA%A6/hover?preview=flow.gif)に置きます。  
+大まかなロジックは、以下のとおりです
+
+	1.カメラが目標を捉えているか評価
+		捉えている → 次の段階の動作へ
+		捉えていない → 左へ旋回し、前の動作へ
+	
+	1.前進する
+	
+	以上の動作を3回繰り返す
+
+	> フローチャート版：[Dropbox](https://www.dropbox.com/home/HMU/2015%E5%B9%B4%E5%BA%A6/hover?preview=flow.gif)に置きます。  
+
+本プログラムは、move.lua,receive.lua,sleep.luaで構成されています
+また、RaspberryPiでモータを制御するため、Tieske氏作成のLuaでGPIOを制御する"rpi-gpio"というパッケージを使用しています
+
+## プログラム実行について
+
+--本プログラムの実行には、RaspberryPiに"rpi-gpio"のインストールが不可欠です
+以下のコードを上から順に入力すると、インストールできます
+
+>	$ sudo apt-get install luarocks
+>	$ sudo luarocks install rpi-gpio --server=http://luarocks.org/repositories/rocks-scm
+
+インストール方法や"rpi-gpio"についての詳細は、[Tieske氏のgithubページ](https://github.com/Tieske/rpi-gpio/blob/master/lua/README.md) へ
+
+--GPIOの仕様により、ルート権限で実行しなければ動きません。以下のコードで実行できます
+
+>	$ sudo lua main.lua
 
 ---
 ## 仕様
 
--- 他言語のプログラムから値を取得する際、その時間などを取得する同じシェルファイルに書き込みます。
+-- 他言語のプログラムから値を取得する際、~~その時間などを取得する同じシェルファイル~~pythonプログラムの返り値は"hoge.txt",rubyプログラムの返り値は"hogehoge.txt"に書き込みます。
 
--- 動作や処理の節々に、若干のディレイを設けています。
+-- 動作や処理の節々に、センサ値取得に時間差を設けるため、若干のディレイを設けています。
+
+-- 全ての動作が終了したとき、"hoge.txt"と"hogehoge.txt"の最終行に、終了時の時間と"Finish!"という文字列が書き込まれます
 
 ---
   
 
 平成27年11月9日 初著
+
+同年11月24日 更新
