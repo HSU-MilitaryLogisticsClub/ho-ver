@@ -14,7 +14,7 @@ main.luaは、hoverに関わるプログラムを統合し、実行するプロ�
 	
 	以上の動作を3回繰り返す
 
-	[フローチャート版](https://www.dropbox.com/home/HMU/2015%E5%B9%B4%E5%BA%A6/hover?preview=flow.gif"フローチャート版")
+[フローチャート版](https://www.dropbox.com/home/HMU/2015%E5%B9%B4%E5%BA%A6/hover?preview=flow.gif)
 
 本プログラムは、move.lua,receive.lua,sleep.luaで構成されています
 また、RaspberryPiでモータを制御するため、Tieske氏作成のLuaでGPIOを制御する"rpi-gpio"というパッケージを使用しています
