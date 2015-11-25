@@ -1,6 +1,7 @@
 GPIO=require "GPIO"
 
 LuaGpio = {
+GPIO.cleanup(),  --format GPIO's pin number
 leftmotor={12, 20}, --select RaspberryPi's GPIO pin to move left motor
 rightmotor={16, 21}, --select RaspberryPi's GPIO pin to move right motor
 ReadyGpio = function(self)
@@ -56,4 +57,5 @@ GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
+GPIO.cleanup()
 end
