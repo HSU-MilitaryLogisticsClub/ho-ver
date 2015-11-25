@@ -26,10 +26,10 @@ function LuaGpio.Back(btime)
 b = os.time() --
 btime = btime
 repeat
-GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.leftmotor[2], GPIO.HIGH)
-GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[2], GPIO.HIGH)
+GPIO.output(LuaGpio.leftmotor[1], 0)
+GPIO.output(LuaGpio.leftmotor[2], 1)
+GPIO.output(LuaGpio.rightmotor[1], 0)
+GPIO.output(LuaGpio.rightmotor[2], 1)
 until os.time() - b >= btime
 end
 function LuaGpio.Left(ltime)
