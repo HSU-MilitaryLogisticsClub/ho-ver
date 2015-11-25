@@ -26,11 +26,11 @@ function LuaGpio.Back(btime)
 b = os.time() --
 btime = btime
 repeat
-GPIO.output(LuaGpio.leftmotor[1], 0)
-GPIO.output(LuaGpio.leftmotor[2], 1)
-GPIO.output(LuaGpio.rightmotor[1], 0)
-GPIO.output(LuaGpio.rightmotor[2], 1)
-until os.time() - b >= btime
+GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
+GPIO.output(LuaGpio.leftmotor[2], GPIO.HIGH)
+GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
+GPIO.output(LuaGpio.rightmotor[2], GPIO.HIGH)
+until (os.time() - b) >= btime
 end
 function LuaGpio.Left(ltime)
 l = os.time() --
@@ -40,7 +40,7 @@ GPIO.output(LuaGpio.leftmotor[1], GPIO.HIGH)
 GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.HIGH)
-until os.time() - l >= ltime
+until (os.time() - l) >= ltime
 end
 function LuaGpio.Right(rtime)
 r = os.time() --
@@ -50,7 +50,7 @@ GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.leftmotor[2], GPIO.HIGH)
 GPIO.output(LuaGpio.rightmotor[1], GPIO.HIGH)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
-until os.time() - r >= rtime
+until (os.time() - r) >= rtime
 end
 function LuaGpio.Stop()
 GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
