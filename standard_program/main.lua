@@ -30,7 +30,7 @@ function main.Catch()
 	
 	open2 = io.open("hogehoge.txt","a")
 	open2:write(os.date().." Finish!")
-	open1:close()
+	open2:close()
 
 	LuaGpio.Stop()
 end
