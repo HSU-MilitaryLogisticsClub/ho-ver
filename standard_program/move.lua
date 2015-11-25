@@ -4,7 +4,7 @@ LuaGpio = {
 GPIO.cleanup(),  --format GPIO's pin number
 leftmotor={12, 20}, --select RaspberryPi's GPIO pin to move left motor
 rightmotor={16, 21}, --select RaspberryPi's GPIO pin to move right motor
-ReadyGpio = function(self)
+ReadyGpio = function()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LuaGpio.leftmotor[1], GPIO.OUT)
 GPIO.setup(LuaGpio.leftmotor[2], GPIO.OUT)
@@ -12,45 +12,45 @@ GPIO.setup(LuaGpio.rightmotor[1], GPIO.OUT)
 GPIO.setup(LuaGpio.rightmotor[2], GPIO.OUT)
 end
 }
-function LuaGpio.Forward(self,ftime)
+function LuaGpio.Forward(ftime)
 f = os.time() --
-self.ftime = ftime
+ftime = ftime
 repeat
 GPIO.output(LuaGpio.leftmotor[1], GPIO.HIGH)
 GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[1], GPIO.HIGH)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
-until ((os.time() - f) >= self.ftime)
+until ((os.time() - f) >= ftime)
 end
-function LuaGpio.Back(self,btime)
+function LuaGpio.Back(btime)
 b = os.time() --
-self.btime = btime
+btime = btime
 repeat
 GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.leftmotor[2], GPIO.HIGH)
 GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.HIGH)
-until os.time() - b >= self.btime
+until os.time() - b >= btime
 end
-function LuaGpio.Left(self,ltime)
+function LuaGpio.Left(ltime)
 l = os.time() --
-self.ltime = ltime
+ltime = ltime
 repeat
 GPIO.output(LuaGpio.leftmotor[1], GPIO.HIGH)
 GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.HIGH)
-until os.time() - l >= self.ltime
+until os.time() - l >= ltime
 end
-function LuaGpio.Right(self,rtime)
+function LuaGpio.Right(rtime)
 r = os.time() --
-self.rtime = rtime
+rtime = rtime
 repeat
 GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.leftmotor[2], GPIO.HIGH)
 GPIO.output(LuaGpio.rightmotor[1], GPIO.HIGH)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
-until os.time() - r >= self.rtime
+until os.time() - r >= rtime
 end
 function LuaGpio.Stop()
 GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)

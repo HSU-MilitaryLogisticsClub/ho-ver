@@ -2,11 +2,10 @@ require "move" --GPIOを使用するためのもの
 require "receive_shell" --シェルファイルからデータを取るもの
 require "sleep" --いわゆる wait を使うためのもの
 
-main = {
-	LuaGpio:ReadyGpio()
-}
+main = {}
 
 function main.Catch()
+	LuaGpio:ReadyGpio()
 	Receive.CallShell(1)
 	Receive.CallShell()
 	wait(0.3)
@@ -22,7 +21,7 @@ function main.Catch()
 
 		Receive.CallShell(1)
 		Receive.CallShell()
-		wait(0.1)
+		wait(0.3)
 	end
 
 	open1 = io.open("hoge.txt","a")
@@ -32,6 +31,8 @@ function main.Catch()
 	open2 = io.open("hogehoge.txt","a")
 	open2:write(os.date().." Finish!")
 	open1:close()
+
+	LuaGpio.Stop()
 end
 
 
