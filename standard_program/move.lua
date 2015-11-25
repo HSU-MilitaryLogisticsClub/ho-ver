@@ -22,6 +22,7 @@ GPIO.output(LuaGpio.rightmotor[1], GPIO.HIGH)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
 until ((os.time() - f) >= ftime)
 end
+--[[
 function LuaGpio.Back(btime)
 b = os.time() --
 btime = btime
@@ -32,6 +33,7 @@ GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
 GPIO.output(LuaGpio.rightmotor[2], GPIO.HIGH)
 until (os.time() - b) >= btime
 end
+]]
 function LuaGpio.Left(ltime)
 l = os.time() --
 ltime = ltime
