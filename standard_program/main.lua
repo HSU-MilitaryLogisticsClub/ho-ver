@@ -13,11 +13,13 @@ function main.Catch()
 	for i=1,3 do
 		while Receive.CallShell(1) == 0 do
 			LuaGpio.Left(1)
+			LuaGpio.Stop()
 			Receive.CallShell(1)
 			wait(0.3)
 		end
 
 		LuaGpio.Forward(5)
+		LuaGpio.Stop()
 
 		Receive.CallShell(1)
 		Receive.CallShell()
@@ -32,7 +34,6 @@ function main.Catch()
 	open2:write(os.date().." Finish!")
 	open2:close()
 
-	LuaGpio.Stop()
 end
 
 
