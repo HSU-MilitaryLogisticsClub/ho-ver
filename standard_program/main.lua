@@ -6,7 +6,6 @@ main = {}
 
 function main.Catch()
 	LuaGpio:ReadyGpio()
-	LuaGpio.stop()
 	Receive.CallShell(1)
 	Receive.CallShell()
 	wait(0.3)

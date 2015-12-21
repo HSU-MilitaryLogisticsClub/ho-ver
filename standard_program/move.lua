@@ -4,7 +4,7 @@ LuaGpio = {
 leftmotor={12, 20}, --select RaspberryPi's GPIO pin to move left motor
 rightmotor={16, 21}, --select RaspberryPi's GPIO pin to move right motor
 ReadyGpio = function()
-GPIO.setwarnings(0)
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LuaGpio.leftmotor[1], GPIO.OUT)
 GPIO.setup(LuaGpio.leftmotor[2], GPIO.OUT)
