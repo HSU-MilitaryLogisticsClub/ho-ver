@@ -55,9 +55,9 @@ GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
 until (os.time() - r) >= rtime
 end
 function LuaGpio.Stop()
-GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
+--GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
+--GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
+--GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
+--GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
 GPIO.cleanup()  --format GPIO's pin number
 end
