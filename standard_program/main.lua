@@ -5,6 +5,7 @@ require "sleep" --いわゆる wait を使うためのもの
 main = {}
 
 function main.Catch()
+	LuaGpio.stop()
 	LuaGpio:ReadyGpio()
 	Receive.CallShell(1)
 	Receive.CallShell()
