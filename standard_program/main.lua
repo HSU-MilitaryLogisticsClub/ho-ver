@@ -9,11 +9,13 @@ function main.Catch()
 	Receive.CallShell(1)
 	Receive.CallShell()
 	print("Setting all right")
+	LuaGpio.Stop()
 	wait(0.3)
 
 	for i=1,3 do
 		while Receive.CallShell(1) == 0 do
 			LuaGpio.Left(1)
+			LuaGpio.Stop()
 			Receive.CallShell(1)
 			print("Seek the object")
 			wait(0.3)
@@ -21,6 +23,7 @@ function main.Catch()
 		
 		print("Find the object")
 		LuaGpio.Forward(5)
+		LuaGpio.Stop()
 
 		Receive.CallShell(1)
 		Receive.CallShell()
@@ -36,6 +39,7 @@ function main.Catch()
 	open2:close()
 
 	LuaGpio.Stop()
+	LuaGpio.Clean()
 	print("All process are finished")
 end
 
