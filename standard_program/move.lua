@@ -1,8 +1,8 @@
 GPIO=require "GPIO"
 
 LuaGpio = {
-leftmotor={12, 20}, --select RaspberryPi's GPIO pin to move left motor
-rightmotor={16, 21}, --select RaspberryPi's GPIO pin to move right motor
+leftmotor={27, 22}, --select RaspberryPi's GPIO pin to move left motor
+rightmotor={6, 5}, --select RaspberryPi's GPIO pin to move right motor
 ReadyGpio = function()
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
