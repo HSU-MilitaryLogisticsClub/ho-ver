@@ -17,7 +17,7 @@ main.luaは、hoverに関わるプログラムを統合し、実行するプロ�
 [フローチャート版](https://www.dropbox.com/home/HMU/2015%E5%B9%B4%E5%BA%A6/hover?preview=flow.gif)
 
 本プログラムは、move.lua,receive.lua,sleep.luaで構成されています
-また、RaspberryPiでモータを制御するため、Tieske氏作成のLuaでGPIOを制御する"rpi-gpio"というパッケージを使用しています
+また、RaspberryPiでモータを制御するため、Tieske氏作成のLuaでGPIOを制御する"rpi-gpio"というパッケージを使用しています。
 
 ## プログラム実行について
 
@@ -28,6 +28,8 @@ main.luaは、hoverに関わるプログラムを統合し、実行するプロ�
 	$ sudo luarocks install rpi-gpio --server=http://luarocks.org/repositories/rocks-scm
 
 インストール方法や"rpi-gpio"についての詳細は、[Tieske氏のgithubページ](https://github.com/Tieske/rpi-gpio/blob/master/lua/README.md) へ
+[ライセンスの条文](https://github.com/Tieske/rpi-gpio/blob/master/LICENCE.txt)
+
 
 -GPIOの仕様により、ルート権限で実行しなければ動きません。以下のコードで実行できます
 
@@ -36,7 +38,7 @@ main.luaは、hoverに関わるプログラムを統合し、実行するプロ�
 ---
 ## 仕様
 
-- 他言語のプログラムから値を取得する際、~~その時間などを取得する同じシェルファイル~~pythonプログラムの返り値は"hoge.txt",rubyプログラムの返り値は"hogehoge.txt"に書き込みます。
+- 他言語のプログラムから値を取得する際、~~その時間などを取得する同じシェルファイル~~ pythonプログラムの返り値は"hoge.txt",rubyプログラムの返り値は"hogehoge.txt"に書き込みます。なお、それぞれのテキストファイルは自動で生成されます。
 
 - 動作や処理の節々に、センサ値取得に時間差を設けるため、若干のディレイを設けています。
 
