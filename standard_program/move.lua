@@ -1,66 +1,50 @@
 GPIO=require "GPIO"
 
+
 LuaGpio = {
 leftmotor={27, 22}, --select RaspberryPi's GPIO pin to move left motor
 rightmotor={6, 5}, --select RaspberryPi's GPIO pin to move right motor
-ReadyGpio = function()
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LuaGpio.leftmotor[1], GPIO.OUT)
-GPIO.setup(LuaGpio.leftmotor[2], GPIO.OUT)
-GPIO.setup(LuaGpio.rightmotor[1], GPIO.OUT)
-GPIO.setup(LuaGpio.rightmotor[2], GPIO.OUT)
-end
 }
-function LuaGpio.Forward(ftime)
-f = os.time() --
-ftime = ftime
-repeat
-GPIO.output(LuaGpio.leftmotor[1], GPIO.HIGH)
-GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[1], GPIO.HIGH)
-GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
-until ((os.time() - f) >= ftime)
+
+function loop(run,left1,left2,right1,right2)
+	now = os.time()
+	repeat
+		GPIO.output(LuaGpio.leftmotor[1], left1)
+		GPIO.output(LuaGpio.leftmotor[2], left2)
+		GPIO.output(LuaGpio.rightmotor[1], right1)
+		GPIO.output(LuaGpio.rightmotor[2], right2)
+	until (os.time() - now) >= run
 end
---[[
-function LuaGpio.Back(btime)
-b = os.time() --
-btime = btime
-repeat
-GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.leftmotor[2], GPIO.HIGH)
-GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[2], GPIO.HIGH)
-until (os.time() - b) >= btime
+
+function LuaGpio.ReadyGpio()
+	GPIO.setwarnings(False)
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setup(LuaGpio.leftmotor[1], GPIO.OUT)
+	GPIO.setup(LuaGpio.leftmotor[2], GPIO.OUT)
+	GPIO.setup(LuaGpio.rightmotor[1], GPIO.OUT)
+	GPIO.setup(LuaGpio.rightmotor[2], GPIO.OUT)
 end
-]]
-function LuaGpio.Left(ltime)
-l = os.time() --
-ltime = ltime
-repeat
-GPIO.output(LuaGpio.leftmotor[1], GPIO.HIGH)
-GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[2], GPIO.HIGH)
-until (os.time() - l) >= ltime
+
+function LuaGpio.Forward(runtime)
+	loop(runtime,GPIO.HIGH,GPIO.LOW,GPIO.HIGH,GPIO.LOW)
 end
-function LuaGpio.Right(rtime)
-r = os.time() --
-rtime = rtime
-repeat
-GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.leftmotor[2], GPIO.HIGH)
-GPIO.output(LuaGpio.rightmotor[1], GPIO.HIGH)
-GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
-until (os.time() - r) >= rtime
+
+function LuaGpio.Back(runtime)
+	loop(runtime,GPIO.LOW,GPIO.HIGH,GPIO.LOW,GPIO.HIGH)
 end
-function LuaGpio.Stop()
-GPIO.output(LuaGpio.leftmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.leftmotor[2], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[1], GPIO.LOW)
-GPIO.output(LuaGpio.rightmotor[2], GPIO.LOW)
+
+function LuaGpio.Left(runtime)
+	loop(runtime,GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.HIGH)
+end
+
+function LuaGpio.Right(runtime)
+	loop(runtime,GPIO.LOW,GPIO.HIGH,GPIO.HIGH,GPIO.LOW)
+end
+
+function LuaGpio.Stop(runtime)
+	loop(runtime,GPIO.LOW,GPIO.LOW,GPIO.LOW,GPIO.LOW)
 end
 
 function LuaGpio.Clean()
-GPIO.cleanup()  --format GPIO's pin number
+	GPIO.cleanup()  --format GPIO's pin number
 end
