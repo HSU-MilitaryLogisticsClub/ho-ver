@@ -14,7 +14,7 @@ function main.Catch()
 	wait(0.3)
 
 	for i=1,1 do
-                --[[
+                
 		while Receive.CallShell(1) == 0 do
 			LuaGpio.Left(1)
 			LuaGpio.Stop()
