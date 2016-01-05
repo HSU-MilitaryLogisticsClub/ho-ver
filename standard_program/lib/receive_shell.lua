@@ -4,19 +4,19 @@ Receive = {}
 		if b==1 then
 			read = os.execute([[
 				#!/bin/sh
-				date >> hoge.txt  #動作時の日付、時刻を入力
-				date +%N >> hoge.txt  #動作時のナノ秒の値を返す
-				python hoge.py >> hoge.txt  #用途で名称変更
+				date >> /home/pi/documents/ho-ver/standard_program/lib/hoge.txt  #動作時の日付、時刻を入力
+				date +%N >> /home/pi/documents/ho-ver/standard_program/lib/hoge.txt  #動作時のナノ秒の値を返す
+				python /home/pi/documents/ho-ver/standard_program/lib/hoge.py >> /home/pi/documents/ho-ver/standard_program/lib/hoge.txt  #用途で名称変更
 
 			]])
 			
 		else
 			read = os.execute([[
 				#!/bin/sh
-				date >> hogehoge.txt
-				date +%N >> hogehoge.txt  #動作時のナノ秒の値を返す
-				chmod +x hoge.rb
-				ruby hoge.rb >> hogehoge.txt 
+				date >> /home/pi/documents/ho-ver/standard_program/lib/hogehoge.txt
+				date +%N >> /home/pi/documents/ho-ver/standard_program/lib/hogehoge.txt  #動作時のナノ秒の値を返す
+				chmod +x /home/pi/documents/ho-ver/standard_program/lib/hoge.rb
+				ruby /home/pi/documents/ho-ver/standard_program/lib/hoge.rb >> /home/pi/documents/ho-ver/standard_program/lib/hogehoge.txt 
 			
 			]])
 		end

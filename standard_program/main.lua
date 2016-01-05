@@ -1,3 +1,4 @@
+package.path = "/home/pi/documents/ho-ver/standard_program/lib/?.lua"  --read package flom "lib"
 require "move" --GPIOを使用するためのもの
 require "receive_shell" --シェルファイルからデータを取るもの
 require "sleep" --いわゆる wait を使うためのもの
@@ -12,7 +13,8 @@ function main.Catch()
 	LuaGpio.Stop()
 	wait(0.3)
 
-	for i=1,3 do
+	for i=1,1 do
+                --[[
 		while Receive.CallShell(1) == 0 do
 			LuaGpio.Left(1)
 			LuaGpio.Stop()
