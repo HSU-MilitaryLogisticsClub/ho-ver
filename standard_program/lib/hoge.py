@@ -1,8 +1,8 @@
 #config: utf-8
+import random
 
 def test():
-	print("Test2 begin\n")
-	print(5)
+	print(random.randint(0,1))
 
 if __name__ == "__main__":
 	test()
