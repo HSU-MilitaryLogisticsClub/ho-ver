@@ -7,6 +7,11 @@ move.luaは、RaspberryPiのGPiOで2つのモータを制御し、2輪ロボッ�
 以下に、可能な挙動と、それに対応した関数を示します。  
 
 なお、luaによるGPIO制御には、githubユーザのTieske氏が製作した rpi.gpio(https://github.com/Tieske/rpi-gpio) を使用させていただいています。
+rpi.gpioのインストールは、以下のコードを上から順に入力すると出来ます。
+
+$ sudo apt-get install luarocks
+$ sudo luarocks install rpi-gpio --server=http://luarocks.org/repositories/rocks-scm
+
 
 |動作|関数|
 |:-:|:-:|
@@ -30,3 +35,6 @@ stop()にも時間入力を必要としました。
 	$ sudo lua move_test.lua
 
 実行すると、前進、後退、左旋回、右旋回の順に3秒ずつ動作します。
+
+
+2016年2/18現在　GPIO動作の最後を　LuaGpio.Stop()　や　LuaGpio.Back()　で終了すると、RaspberryPiが原因不明のフリーズをする現象が起きます。
