@@ -1,5 +1,7 @@
 require "receive_shell"
 
+Receive.WriteDate()
+
 function i2cTest()
 	now = os.time()
 	while timeCount == 10 do
