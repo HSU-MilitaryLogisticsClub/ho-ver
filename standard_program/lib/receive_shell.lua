@@ -5,10 +5,11 @@ Receive = {}
 			#!/bin/sh
 
 			#date >> /home/pi/doc/ho-ver/standard_program/lib/hoge.txt  #動作時の日付、時刻を入力
-			date >> hoge.txt
+			date >> camera.txt
 
 			#date >> /home/pi/doc/ho-ver/standard_program/lib/hogehoge.txt
-			date >> hogehoge.txt
+			date >> jairo_data.txt
+			date >> acceleration_data.txt
 			]])
 	end
 
@@ -35,10 +36,15 @@ Receive = {}
 				#chmod +x /home/pi/doc/ho-ver/standard_program/lib/hoge.rb  		   #hoge.rbに実行権限を付与する
 				#ruby /home/pi/doc/ho-ver/standard_program/lib/hoge.rb >> /home/pi/documents/ho-ver/standard_program/lib/hogehoge.txt 
 				
-				## RaspberryPi以外の環境用
-				date +%M:%S:%N >> hogehoge.txt 
-				chmod +x hoge.rb
-				ruby hoge.rb >> hogehoge.txt
+				## RaspberryPi以外の環境用 ジャイロ
+				date +%M:%S:%N >> jairo_data.txt 
+				chmod +x i2c_class_test.rb
+				ruby i2c_acc.rb >> jairo_data.txt
+
+				## RaspberryPi以外の環境用 加速度
+				date +%M:%S:%N >> acceleration_data.txt 
+				chmod +x i2c_acc.rb
+				ruby i2c_acc.rb >> acceleration_data.txt
 			]])
 		end
 	end

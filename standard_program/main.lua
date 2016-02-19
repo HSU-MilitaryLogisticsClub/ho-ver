@@ -1,4 +1,4 @@
-package.path = "/home/pi/documents/ho-ver/standard_program/lib/?.lua"  --read package flom "lib"
+package.path = "/home/pi/doc/ho-ver/standard_program/lib/?.lua"  --read package flom "lib"
 require "move" --GPIOを使用するためのもの
 require "receive_shell" --シェルファイルからデータを取るもの
 require "sleep" --いわゆる wait を使うためのもの
