@@ -44,6 +44,8 @@ end
   cs.i2c_init(bus_address, power_ctl, measure)
 
   time = Time.now
-  30.times do
-    cs.avetimes(time,2)
-  end
+  #30.times do
+  #  cs.avetimes(time,2)
+  #end
+
+print(cs.avetimes(time,1))
