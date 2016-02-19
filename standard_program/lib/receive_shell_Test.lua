@@ -31,7 +31,8 @@ end
 --assert(open:ReadShell(),"a",5)
 function TestHogehoge()
 	Receive.CallShell()
-	os.execute("cat hogehoge.txt")
+	os.execute("cat acceleration_data.txt")
+	os.execute("cat jairo_data.txt")
 	print("Test2 is succeed!")
 end
 
