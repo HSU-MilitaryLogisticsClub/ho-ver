@@ -40,6 +40,8 @@ sc = L3GD20.new(1)
 sc.i2c_init(sleadd,power_enable,setval)
 
 time = Time.now
-30.times do
-  sc.avetimes(time,2)
-end
+#30.times do
+#  sc.avetimes(time,2)
+#end
+
+print(sc.avetimes(time,1))
