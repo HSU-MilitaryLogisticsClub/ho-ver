@@ -23,8 +23,8 @@ Receive = {}
 				#python3 /home/pi/doc/ho-ver/standard_program/lib/hoge.py >> /home/pi/documents/ho-ver/standard_program/lib/hoge.txt  #用途で名称変更
 
 				## RaspberryPi以外の環境用
-				date +%M:%S:%N >> hoge.txt
-				python hoge.py >> hoge.txt
+				date +%M:%S:%N >> camera.txt
+				python hoge.py >> camera.txt
 			]])
 			
 		else
@@ -38,13 +38,13 @@ Receive = {}
 				
 				## RaspberryPi以外の環境用 ジャイロ
 				date +%M:%S:%N >> jairo_data.txt 
-				chmod +x i2c_class_test.rb
-				ruby i2c_acc.rb >> jairo_data.txt
+				chmod +x /home/pi/doc/ho-ver/src/example/i2c_class_test.rb
+				ruby i2c_acc.rb >> /home/pi/doc/ho-ver/src/example/jairo_data.txt
 
 				## RaspberryPi以外の環境用 加速度
 				date +%M:%S:%N >> acceleration_data.txt 
-				chmod +x i2c_acc.rb
-				ruby i2c_acc.rb >> acceleration_data.txt
+				chmod +x /home/pi/doc/ho-ver/src/example/i2c_acc.rb
+				ruby /home/pi/doc/ho-ver/src/example/i2c_acc.rb >> acceleration_data.txt
 			]])
 		end
 	end
