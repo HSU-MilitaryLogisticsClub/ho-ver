@@ -38,13 +38,13 @@ Receive = {}
 				
 				## RaspberryPi以外の環境用 ジャイロ
 				date +%M:%S:%N >> jairo_data.txt 
-				chmod +x /home/pi/doc/ho-ver/src/examples/i2c_class_test.rb
-				ruby /home/pi/doc/ho-ver/src/examples/i2c_acc.rb >> jairo_data.txt
+				chmod +x i2c_class_test.rb
+				ruby i2c_acc.rb >> jairo_data.txt
 
 				## RaspberryPi以外の環境用 加速度
 				date +%M:%S:%N >> acceleration_data.txt 
-				chmod +x /home/pi/doc/ho-ver/src/examples/i2c_acc.rb
-				ruby /home/pi/doc/ho-ver/src/examples/i2c_acc.rb >> acceleration_data.txt
+				chmod +x i2c_acc.rb
+				ruby i2c_acc.rb >> acceleration_data.txt
 			]])
 		end
 	end
