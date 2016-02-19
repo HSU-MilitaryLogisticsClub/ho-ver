@@ -7,7 +7,7 @@ function i2cTest()
 	while timeCount == 10 do
 		Receive.CallShell()
 		timeCount = now - os.time
-		print(print(timeCount)
+		print(timeCount)
 	end
 	print("write censor's data")
 end
