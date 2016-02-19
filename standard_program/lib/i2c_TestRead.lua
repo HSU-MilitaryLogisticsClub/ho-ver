@@ -1,13 +1,14 @@
 require "receive_shell"
 
 function i2cTest()
+	count = 0
 	Receive.WriteDate()
 	print("write today's date")
-	now = os.time()
-	while timeCount == 10 do
+	while count == 10 do
 		Receive.CallShell()
-		timeCount = os.time - now 
+		count = count+1
 		print(timeCount)
+		os.execute("sleep 0.1s")
 	end
 	print("write censor's data")
 end
